@@ -1,5 +1,28 @@
+#include "src/fmts.h"
 #include <iostream>
 
 int main() {
-	 std::cout << "Hello, World" << std::endl; 
+	 // create threads
+	 FMTS fmts(4);
+
+	 int counter = 0;
+	 std::mutex mtx;
+	 for (int i = 0; i < 10; i++) {
+		  fmts.submit_task([&mtx, &counter] {
+				std::lock_guard<std::mutex> lock(mtx);
+				for (int i = 0; i < 10000; i++) {
+					 counter++;
+				}
+		  });
+	 }
+
+	 // ensure that tasks are all completed
+	 while (!fmts.is_empty()) {
+	 }
+
+
+	 // stop all threads
+	 fmts.terminate();
+	 std::cout << counter << std::endl;
+	 // expected result, 100000
 }
