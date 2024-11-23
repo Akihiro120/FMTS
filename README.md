@@ -12,8 +12,12 @@ FMTS is a simple and functional task-based multithreading system.
 
  int counter = 0;
  std::mutex mtx;
+
+ // create tasks
  for (int i = 0; i < 10; i++) {
       fmts.submit_task([&mtx, &counter] {
+
+            // lock the counter variable
             std::lock_guard<std::mutex> lock(mtx);
             for (int i = 0; i < 10000; i++) {
                  counter++;
@@ -29,5 +33,5 @@ FMTS is a simple and functional task-based multithreading system.
  // stop all threads
  fmts.terminate();
  std::cout << counter << std::endl;
- // expected result, 100000
+ // expected result, 100t, 100000
 ```

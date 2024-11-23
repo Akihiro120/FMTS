@@ -85,6 +85,7 @@ private:
 
 	 // thread related
 	 std::mutex _mtx;
+	 std::mutex _lock;
 	 std::atomic<bool> _running;
 	 std::vector<std::thread> _worker_threads;
 	 std::queue<std::function<void()>> _tasks;

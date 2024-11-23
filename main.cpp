@@ -7,8 +7,12 @@ int main() {
 
 	 int counter = 0;
 	 std::mutex mtx;
+
+	 // create tasks
 	 for (int i = 0; i < 10; i++) {
 		  fmts.submit_task([&mtx, &counter] {
+
+				// lock the counter variable
 				std::lock_guard<std::mutex> lock(mtx);
 				for (int i = 0; i < 10000; i++) {
 					 counter++;
