@@ -33,5 +33,5 @@ FMTS is a simple and functional task-based multithreading system.
  // stop all threads
  fmts.terminate();
  std::cout << counter << std::endl;
- // expected result, 100t, 100000
+ // expected result, 100000
 ```
